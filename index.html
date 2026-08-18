@@ -386,7 +386,7 @@
 
     .hero-showcase {
       position: relative;
-      min-height: 530px;
+      min-height: 760px;
     }
 
     .hero-frame {
@@ -414,7 +414,7 @@
 
     .hero-media {
       position: absolute;
-      inset: 34px 34px 92px;
+      inset: 28px 28px 48px;
     }
 
     .media-shell {
@@ -551,6 +551,64 @@
     .float-card.two { bottom: 0; left: 0; }
     .float-card.two strong { color: var(--amber); }
 
+    .honours-showcase .hero-frame {
+      background:
+        radial-gradient(circle at 80% 18%, rgba(73, 203, 163, .12), transparent 32%),
+        linear-gradient(145deg, rgba(73, 203, 163, .06), rgba(15, 24, 38, .98)),
+        var(--panel-2);
+    }
+
+    .honours-media {
+      inset: 78px 34px 118px;
+    }
+
+    .honours-document {
+      min-height: 220px;
+      padding: 18px;
+      background: rgba(238, 241, 245, .98);
+    }
+
+    .honours-document img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: transparent;
+    }
+
+    .honours-meta {
+      position: absolute;
+      right: 32px;
+      bottom: 34px;
+      left: 32px;
+      display: grid;
+      gap: 6px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+
+    .honours-meta strong {
+      color: var(--paper);
+      font-size: 14px;
+    }
+
+    .honours-meta span {
+      color: var(--muted);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .honours-card strong {
+      max-width: 180px;
+      font-size: 24px;
+    }
+
+    .fyp-result-achievement {
+      border-color: rgba(73, 203, 163, .48);
+      background: linear-gradient(160deg, rgba(73, 203, 163, .10), var(--panel));
+    }
+
     /* Sections */
     section { padding: 100px 0; }
 
@@ -622,7 +680,7 @@
 
     .achievement-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: 14px;
       margin-top: 20px;
     }
@@ -1372,6 +1430,81 @@
       font-size: 14px;
     }
 
+    .credentials-section {
+      margin-top: 64px;
+      scroll-margin-top: 95px;
+    }
+
+    .credentials-heading {
+      display: grid;
+      grid-template-columns: 1fr .8fr;
+      gap: 28px;
+      align-items: end;
+      margin-bottom: 26px;
+    }
+
+    .credentials-heading h3 {
+      font-size: 30px;
+    }
+
+    .credentials-heading > p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .credentials-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .credential-card {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: var(--panel);
+    }
+
+    .credential-preview {
+      display: grid;
+      min-height: 250px;
+      padding: 14px;
+      border-right: 1px solid var(--line);
+      background: rgba(255, 255, 255, .025);
+      place-items: center;
+    }
+
+    .credential-preview img {
+      width: 100%;
+      height: 100%;
+      max-height: 290px;
+      object-fit: contain;
+    }
+
+    .credential-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 25px;
+    }
+
+    .credential-body h4 {
+      margin-top: 8px;
+      font-size: 22px;
+    }
+
+    .credential-body p {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .credential-body .project-link {
+      margin-top: 18px;
+    }
+
     /* Footer */
     footer {
       padding: 100px 0 52px;
@@ -1495,7 +1628,8 @@
       .hero-grid { gap: 46px; }
       .hero-showcase { min-height: 450px; }
       .hero-frame { inset: 16px 10px 38px; }
-      .hero-media { inset: 25px 22px 92px; }
+      .hero-media { inset: 24px 22px 44px; }
+      .honours-media { inset: 72px 22px 124px; }
 
       section { padding: 78px 0; }
 
@@ -1507,8 +1641,19 @@
       .card-grid,
       .story-images,
       .hackathon-stat-grid,
-      .implementation-gallery {
+      .implementation-gallery,
+      .credentials-grid,
+      .credentials-heading {
         grid-template-columns: 1fr;
+      }
+
+      .credential-card {
+        grid-template-columns: 1fr;
+      }
+
+      .credential-preview {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
       }
 
       .implementation-card.wide {
@@ -1619,6 +1764,7 @@
         <a href="#skills">Skills</a>
         <a href="#experience">Experience</a>
         <a href="#education">Education</a>
+        <a href="#credentials">Credentials</a>
         <a href="#contact">Contact</a>
         <a class="nav-resume" href="Ryan-Lim-CV.pdf" target="_blank" rel="noopener">Resume ↗</a>
       </div>
@@ -1631,60 +1777,48 @@
         <div class="availability">Open to graduate AI and software roles</div>
         <div class="eyebrow">BSc (Hons) Artificial Intelligence</div>
         <h1>Ryan Lim Xin Kai</h1>
-        <div class="hero-role">Graduate AI &amp; Software Developer</div>
+        <div class="hero-role">AI Graduate</div>
 
         <p class="hero-lede">
-          I build end-to-end intelligent applications—from accessible mobile products and predictive models to local AI tools, large-scale data pipelines and agent-based simulations.
+          I build end-to-end intelligent applications - from accessible mobile products and predictive models to local AI tools, large-scale data pipelines and agent-based simulations.
         </p>
 
         <div class="hero-proof" aria-label="Portfolio highlights">
-          <span>Final Year Project: 96%</span>
-          <span>Flutter + FastAPI + PyTorch</span>
+          <span>First Class Honours</span>
           <span>Based in Kuala Lumpur, Malaysia</span>
         </div>
 
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#alzcare">Explore AlzCare <span aria-hidden="true">→</span></a>
+          <a class="btn btn-primary" href="Ryan-Lim-HEAR-Report.pdf" target="_blank" rel="noopener">Download HEAR Report <span aria-hidden="true">↗</span></a>
           <a class="btn btn-secondary" href="https://github.com/LimRyan06" target="_blank" rel="noopener">GitHub ↗</a>
           <a class="btn btn-secondary" href="Ryan-Lim-CV.pdf" target="_blank" rel="noopener">Download CV</a>
         </div>
       </div>
 
-      <div class="hero-showcase" aria-label="AlzCare project preview">
+      <div class="hero-showcase honours-showcase" aria-label="First Class Honours achievement">
         <div class="hero-frame">
-          <div class="hero-media">
-            <div class="media-shell">
-              <img class="contain-image" src="assets/alzcare-hero.webp" alt="AlzCare role selection, login and account creation mobile screens" onerror="showFallback(this)">
+          <div class="hero-media honours-media">
+            <div class="media-shell honours-document">
+              <img class="contain-image" src="assets/first-class-honours.webp" alt="De Montfort University Higher Education Achievement Report showing Bachelor of Science Honours in Artificial Intelligence Studies with First Class classification" onerror="showFallback(this)">
               <div class="media-fallback">
                 <div class="placeholder-inner">
-                  <div class="placeholder-icon">IMG</div>
-                  <strong>Add your strongest AlzCare product image here</strong>
-                  <code>assets/alzcare-hero.webp</code>
+                  <div class="placeholder-icon">1ST</div>
+                  <strong>First Class Honours</strong>
+                  <code>assets/first-class-honours.webp</code>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="hero-stream" aria-hidden="true">
-            <div class="stream-row">
-              <div class="dot taken"></div><div class="dot taken"></div><div class="dot taken"></div>
-              <div class="dot delayed"></div><div class="dot taken"></div><div class="dot missed"></div>
-              <div class="dot taken"></div><div class="dot taken"></div><div class="dot delayed"></div>
-              <div class="dot taken"></div><div class="dot taken"></div><div class="dot missed"></div>
-              <div class="dot taken"></div><div class="dot taken"></div>
-            </div>
-            <div class="stream-label">14-day adherence sequence used by the GRU model</div>
+          <div class="honours-meta">
+            <strong>BSc (Hons) Artificial Intelligence</strong>
+            <span>De Montfort University · First Class · July 2026</span>
           </div>
         </div>
 
-        <div class="float-card one">
-          <strong>96%</strong>
-          <span>FYP result</span>
-        </div>
-
-        <div class="float-card two">
-          <strong>23/23</strong>
-          <span>Functional tests passed</span>
+        <div class="float-card one honours-card">
+          <strong>First Class</strong>
+          <span>Honours · 2026</span>
         </div>
       </div>
     </div>
@@ -1767,6 +1901,10 @@
         </div>
 
         <div class="achievement-grid" aria-label="AlzCare achievements">
+          <div class="achievement fyp-result-achievement">
+            <strong>96%</strong>
+            <span>Final Year Project result</span>
+          </div>
           <div class="achievement">
             <strong>Full-stack</strong>
             <span>Flutter, FastAPI and Firebase integration</span>
@@ -2455,8 +2593,9 @@
             </p>
 
             <div class="result-row">
-              <span class="result-pill">3.6 CGPA</span>
+              <span class="result-pill">First Class Honours</span>
               <span class="result-pill">Final Year Project: 96%</span>
+              <span class="result-pill">3.6 CGPA</span>
             </div>
           </article>
 
@@ -2473,13 +2612,53 @@
           </article>
         </div>
 
-        <article class="certificate">
-          <div class="kicker">Certificate · November 2025</div>
-          <h3>AI &amp; Large Language Models Learning Program</h3>
-          <p>
-            Studied LLM architecture, training and fine-tuning, text preprocessing, RLHF, multimodal systems and the ethical, privacy and environmental considerations involved in deploying AI.
-          </p>
-        </article>
+        <div class="credentials-section" id="credentials">
+          <div class="credentials-heading">
+            <div>
+              <div class="eyebrow">Credentials &amp; certifications</div>
+              <h3>Continuous learning beyond the degree</h3>
+            </div>
+            <p>Short-form credentials that complement my AI engineering, software development and practical build experience.</p>
+          </div>
+
+          <div class="credentials-grid">
+            <article class="credential-card">
+              <a class="credential-preview" href="certificates/DataCamp-LLM-Concepts.pdf" target="_blank" rel="noopener" aria-label="Open DataCamp Large Language Models Concepts certificate">
+                <img src="assets/cert-datacamp-llm-concepts.webp" alt="DataCamp Statement of Accomplishment for Large Language Models Concepts" loading="lazy">
+              </a>
+              <div class="credential-body">
+                <div class="kicker">DataCamp · November 2025</div>
+                <h4>Large Language Models (LLMs) Concepts</h4>
+                <p>Completed a focused two-hour course covering core large-language-model concepts.</p>
+                <a class="project-link" href="certificates/DataCamp-LLM-Concepts.pdf" target="_blank" rel="noopener">View certificate ↗</a>
+              </div>
+            </article>
+
+            <article class="credential-card">
+              <a class="credential-preview" href="certificates/PDX2026-Vibe-Coding-101.pdf" target="_blank" rel="noopener" aria-label="Open Vibe Coding 101 certificate">
+                <img src="assets/cert-vibe-coding-101.webp" alt="PDX 2026 Vibe Coding 101 certificate of completion" loading="lazy">
+              </a>
+              <div class="credential-body">
+                <div class="kicker">PDX 2026 · July 2026</div>
+                <h4>Vibe Coding 101</h4>
+                <p>Completed the PDX2026 workshop on building AI-enabled web experiences, hosted by Kracked Devs.</p>
+                <a class="project-link" href="certificates/PDX2026-Vibe-Coding-101.pdf" target="_blank" rel="noopener">View certificate ↗</a>
+              </div>
+            </article>
+
+            <article class="credential-card">
+              <a class="credential-preview" href="assets/cert-ai-agents-workshop-1.webp" target="_blank" rel="noopener" aria-label="Open AI Agents From Zero to Production Workshop 1 certificate">
+                <img src="assets/cert-ai-agents-workshop-1.webp" alt="APU Hackthletes certificate of participation for AI Agents From Zero to Production Workshop 1" loading="lazy">
+              </a>
+              <div class="credential-body">
+                <div class="kicker">APU Hackthletes · July 2026</div>
+                <h4>AI Agents: From Zero to Production Workshop 1</h4>
+                <p>Participated in the APU Hackthletes workshop focused on AI agents and practical pathways from prototype ideas to production-oriented thinking.</p>
+                <a class="project-link" href="assets/cert-ai-agents-workshop-1.webp" target="_blank" rel="noopener">View certificate ↗</a>
+              </div>
+            </article>
+          </div>
+        </div>
       </div>
     </section>
   </main>
