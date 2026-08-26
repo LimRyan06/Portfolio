@@ -18,6 +18,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
+  <!-- Syntax highlighting for native Python code blocks -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+
   <style>
     :root {
       --ink: #0c121c;
@@ -333,8 +336,9 @@
     }
 
     .hero h1 {
-      max-width: 760px;
-      font-size: clamp(52px, 7vw, 82px);
+      max-width: none;
+      font-size: clamp(50px, 5vw, 72px);
+      white-space: nowrap;
     }
 
     .hero-role {
@@ -674,9 +678,29 @@
       grid-template-columns: 1fr 1fr;
       gap: 18px;
       margin-top: 48px;
+      align-items: start;
     }
 
-    .gallery .media-shell { min-height: 420px; }
+    /* AlzCare screenshots: frame hugs the actual image */
+    .gallery .media-shell {
+      display: block;
+      min-height: 0;
+      height: auto;
+      padding: 0;
+      overflow: hidden;
+      border: 1px solid var(--line-strong);
+      border-radius: 20px;
+      background: transparent;
+    }
+
+    .gallery .media-shell img,
+    .gallery .media-shell img.contain-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: initial;
+      background: transparent;
+    }
 
     .achievement-grid {
       display: grid;
@@ -769,6 +793,113 @@
       font-family: "JetBrains Mono", monospace;
       font-size: 11px;
     }
+
+
+    /* Native IDE-style code windows */
+    .implementation-card.code-card {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      background: #0d1117;
+    }
+
+    .code-window {
+      display: flex;
+      min-width: 0;
+      min-height: 520px;
+      max-height: 620px;
+      flex-direction: column;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background: #0d1117;
+    }
+
+    .code-toolbar {
+      display: flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 10px 12px 10px 16px;
+      border-bottom: 1px solid #252b36;
+      background: #161b22;
+    }
+
+    .code-file {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      min-width: 0;
+      color: #c9d1d9;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+    }
+
+    .code-file::before {
+      width: 8px;
+      height: 8px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: var(--teal);
+      content: "";
+    }
+
+    .copy-code {
+      flex: 0 0 auto;
+      padding: 7px 11px;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      background: #21262d;
+      color: #c9d1d9;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      cursor: pointer;
+      transition: border-color .18s ease, color .18s ease, background .18s ease;
+    }
+
+    .copy-code:hover {
+      border-color: var(--teal);
+      background: #1b242d;
+      color: var(--teal-bright);
+    }
+
+    .copy-code.copied {
+      border-color: rgba(73, 203, 163, .55);
+      color: var(--teal);
+    }
+
+    .code-window pre[class*="language-"] {
+      flex: 1;
+      min-width: 0;
+      margin: 0 !important;
+      padding: 20px 22px 24px !important;
+      overflow: auto;
+      border-radius: 0;
+      background: #0d1117 !important;
+      text-shadow: none !important;
+      tab-size: 4;
+    }
+
+    .code-window code[class*="language-"],
+    .code-window pre[class*="language-"] {
+      font-family: "JetBrains Mono", Consolas, Monaco, monospace !important;
+      font-size: 11.5px;
+      line-height: 1.7;
+      white-space: pre;
+      word-break: normal;
+      word-spacing: normal;
+      hyphens: none;
+    }
+
+    .code-card .implementation-copy { background: var(--panel); }
+    .code-window .token.comment, .code-window .token.prolog, .code-window .token.doctype, .code-window .token.cdata { color: #6a9955; }
+    .code-window .token.keyword { color: #c586c0; }
+    .code-window .token.function { color: #dcdcaa; }
+    .code-window .token.class-name { color: #4ec9b0; }
+    .code-window .token.string { color: #ce9178; }
+    .code-window .token.number, .code-window .token.boolean { color: #b5cea8; }
+    .code-window .token.operator, .code-window .token.punctuation { color: #d4d4d4; }
+    .code-window .token.builtin { color: #4ec9b0; }
 
     .contribution-grid {
       display: grid;
@@ -948,6 +1079,87 @@
     .project-story.in-development .media-shell {
       min-height: 520px;
       background: transparent;
+    }
+
+    .agentic-project {
+      align-items: stretch;
+    }
+
+    .agentic-project .project-content {
+      justify-content: flex-start;
+      padding-top: 34px;
+    }
+
+    .agentic-project .project-content h3 {
+      max-width: 11ch;
+    }
+
+    .agentic-project .tag-row {
+      margin-top: 18px;
+    }
+
+    .agentic-project .chip-row {
+      margin-top: 16px;
+    }
+
+    .agentic-project .project-points {
+      margin-top: 24px;
+    }
+
+    .agentic-project .project-points li {
+      line-height: 1.65;
+    }
+
+    .agentic-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      height: 100%;
+    }
+
+    .agentic-shot {
+      display: grid;
+      grid-template-rows: minmax(0, 1fr) auto;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--panel);
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+
+    .agentic-shot:hover {
+      transform: translateY(-4px);
+      border-color: rgba(73, 203, 163, .42);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, .22);
+    }
+
+    .agentic-shot .media-shell {
+      min-height: 176px;
+      border: 0;
+      border-radius: 0;
+      background: #0d1421;
+    }
+
+    .agentic-shot .media-shell img,
+    .agentic-shot .media-shell img.contain-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .22s ease;
+    }
+
+    .agentic-shot:hover .media-shell img,
+    .agentic-shot:hover .media-shell img.contain-image {
+      transform: scale(1.035);
+    }
+
+    .agentic-shot figcaption {
+      padding: 11px 12px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10.5px;
+      line-height: 1.45;
     }
 
     .development-strip {
@@ -1300,10 +1512,24 @@
     }
 
     .project-card .media-shell {
-      min-height: 250px;
-      border: 0;
-      border-bottom: 1px solid var(--line);
-      border-radius: 0;
+      display: block;
+      min-height: 0;
+      height: auto;
+      aspect-ratio: 16 / 10;
+      padding: 0;
+      overflow: hidden;
+      border: 1px solid var(--line-strong);
+      border-radius: 16px 16px 0 0;
+      background: #0d1421;
+    }
+
+    .project-card .media-shell img,
+    .project-card .media-shell img.contain-image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: transparent;
     }
 
     .project-card-body { padding: 24px; }
@@ -1665,6 +1891,16 @@
         min-height: 320px;
       }
 
+      .code-window {
+        min-height: 430px;
+        max-height: 560px;
+      }
+
+      .code-window code[class*="language-"],
+      .code-window pre[class*="language-"] {
+        font-size: 10.5px;
+      }
+
       .hackathon-intro,
       .story-step {
         grid-template-columns: 1fr;
@@ -1674,7 +1910,10 @@
         order: initial;
       }
 
-      .gallery .media-shell { min-height: 320px; }
+      .gallery .media-shell {
+        min-height: 0;
+        height: auto;
+      }
 
       .architecture {
         grid-template-columns: 1fr;
@@ -1692,6 +1931,10 @@
 
       .project-story.in-development .media-shell {
         min-height: 300px;
+      }
+
+      .agentic-grid {
+        grid-template-columns: 1fr;
       }
 
       .development-strip,
@@ -1724,7 +1967,10 @@
     }
 
     @media (max-width: 460px) {
-      .hero h1 { font-size: 47px; }
+      .hero h1 {
+        font-size: 47px;
+        white-space: normal;
+      }
       .hero-showcase { min-height: 415px; }
 
       .float-card { padding: 12px 13px; }
@@ -1780,7 +2026,7 @@
         <div class="hero-role">AI Graduate</div>
 
         <p class="hero-lede">
-          I build end-to-end intelligent applications - from accessible mobile products and predictive models to local AI tools, large-scale data pipelines and agent-based simulations.
+          I build end-to-end AI systems that could turn real-world problems into working systems — combining machine learning, agentic AI, intelligent applications and data-driven engineering.
         </p>
 
         <div class="hero-proof" aria-label="Portfolio highlights">
@@ -1812,13 +2058,13 @@
 
           <div class="honours-meta">
             <strong>BSc (Hons) Artificial Intelligence</strong>
-            <span>De Montfort University · First Class · July 2026</span>
+            <span> Asia Pacific University & De Montfort University · First Class July 2026</span>
           </div>
         </div>
 
         <div class="float-card one honours-card">
-          <strong>First Class</strong>
-          <span>Honours · 2026</span>
+          <strong>First Class Honours</strong>
+          <span>2026</span>
         </div>
       </div>
     </div>
@@ -1829,10 +2075,10 @@
       <div class="wrap">
         <div class="case-hero">
           <div>
-            <div class="eyebrow">Featured case study · Final Year Project</div>
+            <div class="eyebrow"> Final Year Project</div>
             <h2>AlzCare</h2>
             <p class="case-sub">
-              An accessibility-first mobile application for Alzheimer's patients and caregivers, combining medication support, cognitive activities and adaptive machine learning within one connected system.
+              An AI-powered, cross-platform health ecosystem that bridges the gap between Alzheimer's patients and caregivers through predictive analytics and adaptive cognitive therapies.
             </p>
 
             <div class="tag-row" style="margin-top:24px;">
@@ -1842,7 +2088,9 @@
               <span class="tag">PyTorch</span>
               <span class="tag">GRU</span>
               <span class="tag">Contextual Bandits</span>
-              <span class="tag">Healthcare AI</span>
+              <span class="tag">Python</span>
+              <span class="tag">Machine Learning</span>
+              <span class="tag">Dart</span>
             </div>
 
             <div class="case-actions">
@@ -1856,21 +2104,21 @@
             <div>
               <h3>The problem</h3>
               <p>
-                Many care tools focus on a single task such as reminders, health logging or cognitive games. They rarely adapt to a patient's changing behaviour or give caregivers a unified view of adherence and cognitive activity.
+                Current dementia care apps are heavily fragmented and static. They fail to adapt to a patient's cognitive decline over time, and they don't provide caregivers with proactive, data-driven insights to prevent medication non-adherence before it happens.
               </p>
             </div>
 
             <div>
               <h3>The solution</h3>
               <p>
-                AlzCare connects a patient-facing mobile experience with caregiver monitoring, a secure FastAPI and Firebase backend, GRU-based non-adherence risk prediction and contextual-bandit personalisation for cognitive activities.
+                An end-to-end platform featuring a dual-interface mobile app (Flutter) synced in real-time via a Python backend. It utilizes a GRU Neural Network to analyze time-series data and predict medication non-adherence risks, alongside Contextual Bandits that dynamically adjust cognitive game difficulty in real-time based on patient performance.
               </p>
             </div>
 
             <div>
               <h3>My role</h3>
               <p>
-                I designed and implemented the full system: mobile UI, backend services, database integration, machine learning components, testing strategy and caregiver-facing reporting.
+                Architected the cross-platform Flutter frontend, engineered the high-performance FastAPI/Firebase backend, and successfully trained and deployed both predictive machine learning models into a production-ready pipeline.
               </p>
             </div>
           </div>
@@ -1925,9 +2173,6 @@
 
         <div class="case-block" id="alzcare-build">
           <h3>What I personally built</h3>
-          <p>
-            This section makes ownership explicit so recruiters can quickly separate the product's features from my direct technical contribution.
-          </p>
 
           <div class="contribution-grid">
             <div class="contribution">
@@ -1965,66 +2210,273 @@
         <div class="case-block">
           <h3>Selected AI implementation</h3>
           <p>
-            These excerpts show how the two adaptive components were implemented rather than only describing them at a high level: the GRU medication-risk model and the contextual-bandit game recommender.
+            A look under the hood. These code excerpts demonstrate the core logic behind AlzCare's two adaptive components: the PyTorch GRU medication-risk model and the Contextual Bandit game recommender.
           </p>
 
           <div class="implementation-gallery" aria-label="AlzCare machine learning implementation">
-            <article class="implementation-card">
-              <div class="media-shell">
-                <img class="contain-image" src="assets/alzcare-gru-architecture.webp" alt="PyTorch GRU class used to predict medication non-adherence risk in AlzCare" loading="lazy" onerror="showFallback(this)">
-                <div class="media-fallback">
-                  <div class="placeholder-inner">
-                    <div class="placeholder-icon">GRU1</div>
-                    <strong>GRU model architecture</strong>
-                    <code>assets/alzcare-gru-architecture.webp</code>
-                  </div>
+            <article class="implementation-card code-card">
+              <div class="code-window">
+                <div class="code-toolbar">
+                  <span class="code-file">gru_model.py</span>
+                  <button class="copy-code" type="button" data-copy-code aria-label="Copy GRU model code">Copy</button>
                 </div>
+                <pre class="language-python"><code class="language-python"># GRU risk prediction for patients medication adherence 
+# pipeline: input -&gt; GRU layer -&gt; linear layer -&gt; sigmoid -&gt; risk score (0-1)
+
+import torch    # library for deep learning operations
+import torch.nn as nn    # neural network module components
+
+# GRU class
+class AdherenceGRU(nn.Module):
+    def __init__(
+        self,
+        input_size: int = 1,    # daily features (1.0 is taken, rest is 0.0)
+        hidden_size: int = 50,    # hidden GRU units size
+        num_layers: int = 1,    # stacked GRU layers 
+        dropout: float = 0.0,    # dropout between stacked layers (active when theres more than 1 layer in num_layers)
+    ):
+        super(AdherenceGRU, self).__init__()
+
+        # sets hidden unit and layer count parameters
+        self.hidden_size = hidden_size 
+        self.num_layers = num_layers
+
+        # GRU layer
+        self.gru = nn.GRU(
+            input_size=input_size,
+            hidden_size=hidden_size,
+            num_layers=num_layers,
+            batch_first=True,     # allows standard input channel order (batch, sequence, feature)
+            dropout=dropout if num_layers &gt; 1 else 0.0,
+        )
+
+        self.fc = nn.Linear(hidden_size, 1)     # Fully connected output layer
+        self.sigmoid = nn.Sigmoid()     # Sigmoid to force output to [0, 1]
+
+    # performs GRU model forward pass computation (x is torch.Tensor, shape (batch, sequence length, input size))
+    def forward(self, x: torch.Tensor) -&gt; torch.Tensor:
+        out, _ = self.gru(x)     # passes inputs through active GRU cells
+        last_hidden = out[:, -1, :]   # extracts summary of the last day in the sequence
+        logit = self.fc(last_hidden)  # calculates raw score
+        risk   = self.sigmoid(logit)  # convert raw score to risk percentage
+        return risk</code></pre>
               </div>
 
               <div class="implementation-copy">
                 <h4>GRU risk-prediction architecture</h4>
-                <p>
-                  A PyTorch <code>nn.GRU</code> processes sequential adherence inputs, passes the final hidden representation through a linear layer and applies a sigmoid function to produce a risk score between 0 and 1.
-                </p>
+                <p>A PyTorch <code>nn.GRU</code> processes sequential adherence inputs, uses the final sequence representation and passes it through a linear layer plus sigmoid to return a non-adherence risk score between 0 and 1.</p>
               </div>
             </article>
 
-            <article class="implementation-card">
-              <div class="media-shell">
-                <img class="contain-image" src="assets/alzcare-gru-training.webp" alt="PyTorch training loop for the AlzCare medication adherence GRU model" loading="lazy" onerror="showFallback(this)">
-                <div class="media-fallback">
-                  <div class="placeholder-inner">
-                    <div class="placeholder-icon">GRU2</div>
-                    <strong>GRU training pipeline</strong>
-                    <code>assets/alzcare-gru-training.webp</code>
-                  </div>
+            <article class="implementation-card code-card">
+              <div class="code-window">
+                <div class="code-toolbar">
+                  <span class="code-file">train_gru.py</span>
+                  <button class="copy-code" type="button" data-copy-code aria-label="Copy GRU training code">Copy</button>
                 </div>
+                <pre class="language-python"><code class="language-python"># training script for GRU (fetches all med logs across all patients -&gt; builds a dataset of sequences with labels -&gt; trains GRU for 50 epochs using Adam + BCELoss)
+
+import torch    # library for deep learning operations
+import torch.nn as nn    # neural network module components
+from torch.utils.data import DataLoader, TensorDataset    # dataloader to manage batching and shuffling, tensordataset to wrap tensors
+from ml.gru_model import AdherenceGRU     # imports GRU model
+from services.firebase import initialize_firebase, get_db      # connects to firebase
+
+# hyper parameters
+SEQ_LEN    = 14
+HIDDEN     = 50
+EPOCHS     = 50
+BATCH_SIZE = 8
+LR         = 0.001
+WEIGHTS_OUT = "ml/gru_weights.pth"
+MIN_SAMPLES = 10   # minimum sequences required for training
+
+# pulls all adherence logs and creates sliding window sequences
+def fetch_training_data() -&gt; tuple[list, list]:
+    db = get_db()
+    patient_docs = list(db.collection("patients").stream())
+
+    X: list[list[float]] = []    # features (sliding window)
+    Y: list[float] = []    # labels (binary risk 1.0 - 0.0)
+
+    # fetch data
+    for patient_doc in patient_docs:
+        patient_id = patient_doc.id
+        docs = (
+            db.collection("adherence_logs")
+            .where("patient_id", "==", patient_id)
+            .stream()
+        )
+        # sort in memory to avoid composite index requirement from Firestore (avoid crashing from missing index)
+        raw = [doc.to_dict() for doc in docs]
+        raw.sort(key=lambda d: d.get("timestamp", ""))
+        events: list[float] = []
+        for entry in raw:
+            status = entry.get("status", "missed")
+            events.append(1.0 if status == "taken" else 0.0)
+        # needs at least 1 seq_len and 1 event to form a training sample
+        if len(events) &lt; SEQ_LEN + 1:
+            continue
+        # sliding window (each window predicts next event)
+        for i in range(len(events) - SEQ_LEN):
+            seq   = events[i : i + SEQ_LEN]
+            label = events[i + SEQ_LEN]
+            risk_label = 1.0 - label
+            X.append(seq)
+            Y.append(risk_label)
+
+    return X, Y
+
+def train() -&gt; None:
+    initialize_firebase()
+    print("[Train] Connected to Firestore ")
+    X, Y = fetch_training_data()
+    print(f"[Train] Collected {len(X)} training sequences from Firestore.")
+    if len(X) &lt; MIN_SAMPLES:
+        print(
+            f"[Train] Not enough data yet ({len(X)} sequences, need {MIN_SAMPLES}+). "
+            "Log more medication events in the app and re-run training."
+        )
+        return
+
+    # Build tensors for pytorch model (shape: (N, SEQ_LEN, 1) and (N, 1))
+    X_tensor = torch.tensor(X, dtype=torch.float32).unsqueeze(-1)
+    Y_tensor = torch.tensor(Y, dtype=torch.float32).unsqueeze(-1)
+    dataset = TensorDataset(X_tensor, Y_tensor)
+    loader  = DataLoader(dataset, batch_size=BATCH_SIZE, shuffle=True)
+    model     = AdherenceGRU(input_size=1, hidden_size=HIDDEN, num_layers=1)
+    criterion = nn.BCELoss()
+    optimizer = torch.optim.Adam(model.parameters(), lr=LR)
+    model.train()
+    print(f"[Train] Training for {EPOCHS} epochs with batch_size={BATCH_SIZE}, lr={LR}…\n")
+
+    # train model
+    for epoch in range(1, EPOCHS + 1):
+        epoch_loss = 0.0
+        for batch_X, batch_Y in loader:
+            optimizer.zero_grad()
+            output = model(batch_X)
+            loss   = criterion(output, batch_Y)
+            loss.backward()
+            optimizer.step()
+            epoch_loss += loss.item()
+        # calculate the average loss (dividing total loss by number of batches)
+        avg_loss = epoch_loss / len(loader)
+        if epoch % 10 == 0 or epoch == 1:
+            print(f"  Epoch {epoch:&gt;3}/{EPOCHS}  -  BCELoss: {avg_loss:.4f}")
+    # save model weights
+    torch.save(model.state_dict(), WEIGHTS_OUT)
+    print(f"\n[Train] Model weights saved to {WEIGHTS_OUT}")
+    print("[Train] Restart the API server to load the updated weights.")
+
+if __name__ == "__main__":
+    train()</code></pre>
               </div>
 
               <div class="implementation-copy">
-                <h4>Model training pipeline</h4>
-                <p>
-                  The training workflow builds sequence tensors, batches them with a <code>DataLoader</code>, optimises binary cross-entropy loss using Adam and saves the learned model weights for the API service.
-                </p>
+                <h4>GRU training pipeline</h4>
+                <p>The training service retrieves adherence logs from Firestore, creates 14-day sliding-window sequences, batches them with a <code>DataLoader</code>, optimises binary cross-entropy loss with Adam and saves the trained PyTorch weights for the API.</p>
               </div>
             </article>
 
-            <article class="implementation-card wide">
-              <div class="media-shell">
-                <img class="contain-image" src="assets/alzcare-contextual-bandit.webp" alt="Contextual bandit implementation for selecting cognitive game difficulty in AlzCare" loading="lazy" onerror="showFallback(this)">
-                <div class="media-fallback">
-                  <div class="placeholder-inner">
-                    <div class="placeholder-icon">CB</div>
-                    <strong>Contextual-bandit recommender</strong>
-                    <code>assets/alzcare-contextual-bandit.webp</code>
-                  </div>
+            <article class="implementation-card code-card wide bandit-code-card">
+              <div class="code-window">
+                <div class="code-toolbar">
+                  <span class="code-file">contextual_bandit.py</span>
+                  <button class="copy-code" type="button" data-copy-code aria-label="Copy contextual bandit code">Copy</button>
                 </div>
+                <pre class="language-python"><code class="language-python"># Contextual bandit (Epsilon-greedy algorithm) for difficulty recommendation
+# every patient's state is maintained in the firestore 'bandit_state' collection so recommendations can bypass server restarts and improve over time
+
+import random     # random variable generator
+from services.firebase import get_db     # helper to retrieve active firestore database
+
+# difficulty options
+ARMS = ["easy", "medium", "hard"]
+EPSILON = 0.2   # 20% explore, 80% exploit
+# difficulty benchmarks used for reward calculations
+_BENCHMARKS = {
+    "easy":   {"max_errors": 6,  "time_par": 45},
+    "medium": {"max_errors": 10, "time_par": 90},
+    "hard":   {"max_errors": 15, "time_par": 150},
+}
+# return initial default state values
+def _default_state() -&gt; dict:
+    return {
+        "counts":   {arm: 0   for arm in ARMS},
+        "q_values": {arm: 0.0 for arm in ARMS},
+    }
+# loads and validates current bandit state from firestore
+def _load_state(patient_id: str) -&gt; dict:
+    db  = get_db()
+    doc = db.collection("bandit_state").document(patient_id).get()
+    if doc.exists:
+        data = doc.to_dict()
+        # make sure all arms present (in case for change of schema)
+        counts   = {arm: data.get("counts",   {}).get(arm, 0)   for arm in ARMS}
+        q_values = {arm: data.get("q_values", {}).get(arm, 0.0) for arm in ARMS}
+        return {"counts": counts, "q_values": q_values}
+    return _default_state()
+
+# saves latest updated model state to firestore
+def _save_state(patient_id: str, state: dict) -&gt; None:
+    db = get_db()
+    db.collection("bandit_state").document(patient_id).set(state, merge=True)
+ 
+# chooses recommendation using epsilon greedy exploration
+def get_recommendation(patient_id: str) -&gt; dict:
+    state = _load_state(patient_id)
+    q     = state["q_values"]
+    if random.random() &lt; EPSILON:
+        chosen = random.choice(ARMS)
+        method = "explore"
+    else:
+        chosen = max(q, key=q.get)
+        method = "exploit"
+    return {
+        "recommended_difficulty": chosen,
+        "method":   method,
+        "q_values": q,
+        "counts":   state["counts"],
+    }
+
+# calculate game reward and update q-values in firestore
+def update_bandit(
+    patient_id: str,
+    difficulty: str,
+    score: int,
+    completion_time: float,
+    errors: int,
+) -&gt; float:
+    if difficulty not in ARMS:
+        return 0.0
+    bench      = _BENCHMARKS[difficulty]
+    max_errors = bench["max_errors"]
+    time_par   = bench["time_par"]
+
+    # base reward for completing game
+    base_reward = 0.5
+    # accuracy bonus (lesser errors give higher rewards)
+    acc_bonus = 0.3 * max(0.0, 1.0 - errors / max(max_errors, 1))
+    # speed bonus (faster times give higher rewards)
+    speed_bonus = 0.2 * max(0.0, min(1.0, 1.0 - completion_time / max(time_par, 1)))
+    reward = round(base_reward + acc_bonus + speed_bonus, 4)
+    # incremental running average update 
+    state = _load_state(patient_id)
+    n     = state["counts"][difficulty] + 1
+    old_q = state["q_values"][difficulty]
+    new_q = old_q + (reward - old_q) / n   # running average
+
+    state["counts"][difficulty]   = n
+    state["q_values"][difficulty] = round(new_q, 6)
+    _save_state(patient_id, state)
+    return reward</code></pre>
               </div>
 
               <div class="implementation-copy">
                 <h4>Adaptive game-difficulty recommender</h4>
                 <p>
-                  An epsilon-greedy contextual-bandit service chooses between easy, medium and hard activities, calculates rewards from accuracy and completion time, and persists updated Q-values and selection counts in Firestore.
+                  The epsilon-greedy contextual bandit balances exploration and exploitation across easy, medium and hard game difficulties. Each patient's Q-values and selection counts are persisted in Firestore, while rewards combine completion, accuracy and speed so recommendations can adapt as the patient continues using AlzCare.
                 </p>
               </div>
             </article>
@@ -2104,94 +2556,71 @@
         </div>
 
         <div class="project-list">
-          <article class="project-story in-development">
-            <div class="project-media">
-              <div class="media-shell">
-                <img class="contain-image" src="assets/agentic-financial-analyst.webp" alt="Dark-themed Agentic Financial Analyst interface with spreadsheet upload, quick analysis actions and an AI chat workspace" loading="lazy" onerror="showFallback(this)">
-                <div class="media-fallback">
-                  <div class="placeholder-inner">
-                    <div class="placeholder-icon">AI</div>
-                    <strong>Agentic Financial Analyst interface</strong>
-                    <code>assets/agentic-financial-analyst.webp</code>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="development-strip">
-              <div>
-                <div class="kicker">Agentic AI · Financial analysis</div>
-                <h3>Agentic Financial Analyst</h3>
-                <p>Currently in development. Full project description and implementation details will be added as the system progresses.</p>
-              </div>
-              <div class="status-pill">In development</div>
-            </div>
-          </article>
-          <article class="project-story">
-            <div class="project-media">
-              <div class="project-gallery-grid" aria-label="Ant Colony Optimisation project gallery">
-                <figure class="project-gallery-item">
-                  <div class="media-shell">
-                    <img class="contain-image" src="assets/aco-baseline.webp" alt="Baseline Ant Colony Optimisation convergence curve and best 20-city route" loading="lazy" onerror="showFallback(this)">
-                    <div class="media-fallback"><div class="placeholder-inner"><div class="placeholder-icon">ACO1</div><strong>Baseline experiment</strong><code>assets/aco-baseline.webp</code></div></div>
-                  </div>
-                  <figcaption>Baseline: 10 ants, ρ = 0.1, 100 iterations</figcaption>
-                </figure>
-                <figure class="project-gallery-item">
-                  <div class="media-shell">
-                    <img class="contain-image" src="assets/aco-evaporation-convergence.webp" alt="Comparison of Ant Colony Optimisation convergence for low and high evaporation rates" loading="lazy" onerror="showFallback(this)">
-                    <div class="media-fallback"><div class="placeholder-inner"><div class="placeholder-icon">ACO2</div><strong>Convergence comparison</strong><code>assets/aco-evaporation-convergence.webp</code></div></div>
-                  </div>
-                  <figcaption>Evaporation rate and convergence behaviour</figcaption>
-                </figure>
-                <figure class="project-gallery-item">
-                  <div class="media-shell">
-                    <img class="contain-image" src="assets/aco-tour-quality.webp" alt="Comparison of route quality produced by low and high pheromone evaporation rates" loading="lazy" onerror="showFallback(this)">
-                    <div class="media-fallback"><div class="placeholder-inner"><div class="placeholder-icon">ACO3</div><strong>Tour quality comparison</strong><code>assets/aco-tour-quality.webp</code></div></div>
-                  </div>
-                  <figcaption>Lower ρ produced the stronger tour in this experiment</figcaption>
-                </figure>
-                <figure class="project-gallery-item">
-                  <div class="media-shell">
-                    <img class="contain-image" src="assets/aco-overview-code.webp" alt="Ant Colony Optimisation overview and Python implementation excerpt" loading="lazy" onerror="showFallback(this)">
-                    <div class="media-fallback"><div class="placeholder-inner"><div class="placeholder-icon">ACO4</div><strong>Algorithm overview</strong><code>assets/aco-overview-code.webp</code></div></div>
-                  </div>
-                  <figcaption>Pheromone update, heuristic selection and evaporation logic</figcaption>
-                </figure>
-              </div>
-            </div>
-
+          <article class="project-story agentic-project in-development">
             <div class="project-content">
-              <div class="kicker">Artificial intelligence · Optimisation</div>
-              <h3>Ant Colony Optimisation for the Travelling Salesman Problem</h3>
-
-              <div class="tag-row" style="margin-top:16px;">
-                <span class="tag">Python</span>
-                <span class="tag">Ant Colony Optimisation</span>
-                <span class="tag">Travelling Salesman Problem</span>
-                <span class="tag">Metaheuristics</span>
-                <span class="tag">Route Optimisation</span>
+              <div class="kicker">AGENTIC AI · FINANCIAL ANALYSIS</div>
+              <h3>Agentic Financial Analyst</h3>
+              <div class="tag-row" aria-label="Agentic Financial Analyst tech stack">
+                <span class="tag">React</span>
+                <span class="tag">FastAPI</span>
+                <span class="tag">SQLModel</span>
+                <span class="tag">Ollama (Llama 3.1 8B)</span>
+                <span class="tag">Sentence-Transformers</span>
+                <span class="tag">Pydantic</span>
+                <span class="tag">ReportLab</span>
               </div>
-
-              <p>
-                A Python implementation of Ant Colony Optimisation for the Travelling Salesman Problem, investigating how pheromone trails, heuristic desirability and evaporation rate influence convergence speed and final route quality.
-              </p>
-
+              <div class="chip-row" aria-label="Agentic Financial Analyst highlights">
+                <span class="chip">0% Math Hallucination</span>
+                <span class="chip">100% Local Inference</span>
+                <span class="chip">9 Deterministic Tools</span>
+              </div>
+              <p>An autonomous local-AI desktop application that automates financial spreadsheet auditing, variance detection, and forensic reconciliation—eliminating LLM mathematical hallucinations through deterministic execution and strict schema guardrails.</p>
               <ul class="project-points">
-                <li>Modelled a 20-city Travelling Salesman Problem and tracked the best route over repeated iterations.</li>
-                <li>Implemented pheromone-guided path selection, trail evaporation and heuristic desirability using Python.</li>
-                <li>Compared evaporation rates of ρ = 0.1 and ρ = 0.9, showing the exploration–exploitation trade-off between slower high-quality search and faster poorer convergence.</li>
+                <li>Built a schema-constrained LLM router in FastAPI using Ollama (Llama 3.1 8B) with automatic Pydantic retry loops to autonomously classify queries and delegate calculations to 9 deterministic Pandas/NumPy analysis engines.</li>
+                <li>Engineered semantic line-item reconciliation using sentence-transformers (all-MiniLM-L6-v2) embeddings and cosine similarity matrices to align non-identical row descriptions across multi-sheet workbooks.</li>
+                <li>Implemented forensic auditing tools including Benford’s Law Chi-Squared distribution testing and Z-Score/IQR statistical outlier detection to automatically flag data fabrication and transaction anomalies.</li>
+                <li>Designed a real-time Server-Sent Events (SSE) streaming engine powering a live step-by-step agent execution trace (AgentTrace), regex grounding claim verification, and automated PDF/Excel report export.</li>
               </ul>
-
               <div class="project-links">
-                <a class="project-link" href="https://github.com/LimRyan06" target="_blank" rel="noopener">Find on GitHub ↗</a>
-                <a class="project-link" href="#contact">Ask about this project →</a>
+                <a class="project-link" href="#" aria-label="GitHub link placeholder for Agentic Financial Analyst">Find on GitHub ↗</a>
+                <a class="project-link" href="#contact">Ask about this project ↗</a>
+              </div>
+            </div>
+
+            <div class="project-media">
+              <div class="agentic-grid" aria-label="Agentic Financial Analyst screenshots">
+                <figure class="agentic-shot">
+                  <div class="media-shell">
+                    <img class="contain-image" src="assets/agentic-financial-analyst.webp" alt="Agentic Financial Analyst dashboard showing the spreadsheet auditing workspace and executive summary area" loading="lazy" onerror="showFallback(this)">
+                    <div class="media-fallback"><div class="placeholder-inner"><div class="placeholder-icon">A1</div><strong>Executive Summary &amp; KPIs</strong><code>assets/agentic-financial-analyst.webp</code></div></div>
+                  </div>
+                  <figcaption>1. Executive Summary &amp; KPIs</figcaption>
+                </figure>
+                <figure class="agentic-shot">
+                  <div class="media-shell">
+                    <img class="contain-image" src="assets/agentic-financial-analyst.webp" alt="Agentic Financial Analyst interface with live Server-Sent Events agent trace" loading="lazy" onerror="showFallback(this)">
+                    <div class="media-fallback"><div class="placeholder-inner"><div class="placeholder-icon">A2</div><strong>Live Agent Trace (SSE)</strong><code>assets/agentic-financial-analyst.webp</code></div></div>
+                  </div>
+                  <figcaption>2. Live Agent Trace (SSE)</figcaption>
+                </figure>
+                <figure class="agentic-shot">
+                  <div class="media-shell">
+                    <img class="contain-image" src="assets/agentic-financial-analyst.webp" alt="Agentic Financial Analyst view for Benford's Law audit output and anomaly inspection" loading="lazy" onerror="showFallback(this)">
+                    <div class="media-fallback"><div class="placeholder-inner"><div class="placeholder-icon">A3</div><strong>Benford's Law Audit Engine</strong><code>assets/agentic-financial-analyst.webp</code></div></div>
+                  </div>
+                  <figcaption>3. Benford's Law Audit Engine</figcaption>
+                </figure>
+                <figure class="agentic-shot">
+                  <div class="media-shell">
+                    <img class="contain-image" src="assets/agentic-financial-analyst.webp" alt="Agentic Financial Analyst exported PDF executive report preview" loading="lazy" onerror="showFallback(this)">
+                    <div class="media-fallback"><div class="placeholder-inner"><div class="placeholder-icon">A4</div><strong>Exported PDF Executive Report</strong><code>assets/agentic-financial-analyst.webp</code></div></div>
+                  </div>
+                  <figcaption>4. Exported PDF Executive Report</figcaption>
+                </figure>
               </div>
             </div>
           </article>
-
-
-          <article class="project-story">
+<article class="project-story">
             <div class="project-media">
               <div class="project-gallery-grid" aria-label="UK Crime Data Analytics project gallery">
                 <figure class="project-gallery-item">
@@ -2310,10 +2739,10 @@
     <section id="hackathons" class="section-lined">
       <div class="wrap">
         <div class="section-title">
-          <div class="eyebrow">Hackathons & competitions</div>
-          <h2>Cambridge Battlecode — Team 0_day</h2>
+          <div class="eyebrow">Hackathons &amp; competitions</div>
+          <h2>Building under pressure, learning fast</h2>
           <p>
-            A storyboard-style recap of one of my favourite team experiences: building and iterating autonomous bots under competition pressure, tracking our progress on the live ladder and refining strategy round by round.
+            Competitive builds and hackathons give me a chance to test ideas quickly, collaborate under time pressure and turn technical concepts into working systems.
           </p>
         </div>
 
@@ -2322,15 +2751,26 @@
             <div class="kicker">Upcoming hackathon</div>
             <h3>Supervity AI Hackathon</h3>
             <p>
-              Participation coming soon. This section will be updated with the challenge, my role, the solution we build and the final outcome once the hackathon begins.
+              Participation coming soon. I will add the challenge, my role, the system we build and the final outcome here once the hackathon begins.
             </p>
           </div>
           <div class="soon-badge">Soon</div>
         </article>
+      </div>
+    </section>
+
+    <section id="battlecode">
+      <div class="wrap">
+        <div class="section-title">
+          <div class="eyebrow">Competitive programming · Bot strategy · Team collaboration</div>
+          <h2>Cambridge Battlecode — Team 0_day</h2>
+          <p>
+            A storyboard-style recap of building and iterating autonomous bots under competition pressure, tracking our progress on the live ladder and refining strategy round by round.
+          </p>
+        </div>
 
         <div class="hackathon-intro">
           <article class="hackathon-summary">
-            <div class="kicker">Competitive programming · Bot strategy · Team collaboration</div>
             <h3>What this experience was about</h3>
             <p>
               Cambridge Battlecode is a six-week programming competition where teams build bots to battle in a turn-based strategy game. Our team, <strong>0_day</strong>, competed in the <strong>UK Main</strong> category and focused on building resource-harvesting, exploration and conveyor-network strategies.
@@ -2623,26 +3063,26 @@
 
           <div class="credentials-grid">
             <article class="credential-card">
-              <a class="credential-preview" href="certificates/DataCamp-LLM-Concepts.pdf" target="_blank" rel="noopener" aria-label="Open DataCamp Large Language Models Concepts certificate">
+              <a class="credential-preview" href="assets/cert-datacamp-llm-concepts.webp" target="_blank" rel="noopener" aria-label="Open DataCamp Large Language Models Concepts certificate">
                 <img src="assets/cert-datacamp-llm-concepts.webp" alt="DataCamp Statement of Accomplishment for Large Language Models Concepts" loading="lazy">
               </a>
               <div class="credential-body">
                 <div class="kicker">DataCamp · November 2025</div>
                 <h4>Large Language Models (LLMs) Concepts</h4>
                 <p>Completed a focused two-hour course covering core large-language-model concepts.</p>
-                <a class="project-link" href="certificates/DataCamp-LLM-Concepts.pdf" target="_blank" rel="noopener">View certificate ↗</a>
+                <a class="project-link" href="assets/cert-datacamp-llm-concepts.webp" target="_blank" rel="noopener">View certificate ↗</a>
               </div>
             </article>
 
             <article class="credential-card">
-              <a class="credential-preview" href="certificates/PDX2026-Vibe-Coding-101.pdf" target="_blank" rel="noopener" aria-label="Open Vibe Coding 101 certificate">
+              <a class="credential-preview" href="assets/cert-vibe-coding-101.webp" target="_blank" rel="noopener" aria-label="Open Vibe Coding 101 certificate">
                 <img src="assets/cert-vibe-coding-101.webp" alt="PDX 2026 Vibe Coding 101 certificate of completion" loading="lazy">
               </a>
               <div class="credential-body">
                 <div class="kicker">PDX 2026 · July 2026</div>
                 <h4>Vibe Coding 101</h4>
                 <p>Completed the PDX2026 workshop on building AI-enabled web experiences, hosted by Kracked Devs.</p>
-                <a class="project-link" href="certificates/PDX2026-Vibe-Coding-101.pdf" target="_blank" rel="noopener">View certificate ↗</a>
+                <a class="project-link" href="assets/cert-vibe-coding-101.webp" target="_blank" rel="noopener">View certificate ↗</a>
               </div>
             </article>
 
@@ -2704,6 +3144,9 @@
     </div>
   </footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+
   <script>
     function showFallback(image) {
       image.style.display = "none";
@@ -2725,6 +3168,39 @@
         menuButton.setAttribute("aria-expanded", "false");
         menuButton.setAttribute("aria-label", "Open navigation");
         menu.classList.remove("is-open");
+      });
+    });
+
+    document.querySelectorAll("[data-copy-code]").forEach(button => {
+      button.addEventListener("click", async () => {
+        const code = button.closest(".code-window")?.querySelector("code");
+        if (!code) return;
+
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(code.textContent);
+          } else {
+            const textarea = document.createElement("textarea");
+            textarea.value = code.textContent;
+            textarea.style.position = "fixed";
+            textarea.style.opacity = "0";
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand("copy");
+            textarea.remove();
+          }
+
+          const originalText = button.textContent;
+          button.textContent = "Copied!";
+          button.classList.add("copied");
+
+          setTimeout(() => {
+            button.textContent = originalText;
+            button.classList.remove("copied");
+          }, 1600);
+        } catch (error) {
+          button.textContent = "Select + copy";
+        }
       });
     });
   </script>
